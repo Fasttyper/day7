@@ -30,13 +30,16 @@ class BoardTile extends StatelessWidget{
 
     switch (tileState){
       case TileState.EMPTY: {
-        widget = Text("");
+        widget = Container();
       } break;
       case TileState.CROSS: {
         widget = Image.asset("images/x.png");
       } break;
       case TileState.CIRCLE: {
         widget = Image.asset("images/o.png");
+      } break;
+      case TileState.EQUAL: {
+        widget = Container();
       } break;
     }
 
