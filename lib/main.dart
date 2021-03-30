@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:day7/board_tile.dart';
-import 'package:day7/tile_state.dart';
 import 'package:flutter/material.dart';
+import 'package:day7/models.dart';
+import 'package:day7/preferences_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,8 +20,9 @@ class _MyAppState extends State<MyApp> {
   int movesCount = 0;
 
   var _boardState = List.filled(9, TileState.EMPTY);
-
   var _currentTurn = TileState.CROSS;
+
+  PreferencesService prefService;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +53,11 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey[600],
-                    width: 8.0,
-                  ),
-                  borderRadius: 
-                  BorderRadius.circular(5)
-                ),
+                    border: Border.all(
+                      color: Colors.grey[600],
+                      width: 8.0,
+                    ),
+                    borderRadius: BorderRadius.circular(5)),
               ),
               SizedBox(
                 height: 80.0,
@@ -122,6 +124,13 @@ class _MyAppState extends State<MyApp> {
       });
 
       final winner = _findWinner();
+
+      if (winner == null) {
+        _saveState();
+      } else {
+        // when the player have won the match.
+      }
+
       if (winner == TileState.CIRCLE || winner == TileState.CROSS) {
         print("Winner is : $winner");
         _showWinnerDialog(winner, "Bizda g'olib mavjud!");
@@ -200,11 +209,23 @@ class _MyAppState extends State<MyApp> {
                   "Qayta boshlash",
                   style: TextStyle(
                     color: Colors.white,
-                  ),),
+                  ),
+                ),
               ),
             ],
           );
         });
+  }
+
+  void _saveState() {
+
+    final newScene = SceneState(
+      currentTurn: _currentTurn,
+      movesCount: movesCount,
+      tilesState: _boardState,
+    );
+
+    prefService.saveState(newScene);
   }
 
   void _resetGame() {

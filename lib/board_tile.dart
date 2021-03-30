@@ -1,4 +1,4 @@
-import 'package:day7/tile_state.dart';
+import 'package:day7/models.dart';
 import 'package:flutter/material.dart';
 
 class BoardTile extends StatelessWidget{

@@ -1,18 +1,18 @@
-import 'dart:math';
+// import 'dart:math';
 
-enum TileState{
-  EMPTY,
-  CROSS,
-  CIRCLE,
-  EQUAL,
-}
+// enum TileState{
+//   EMPTY,
+//   CROSS,
+//   CIRCLE,
+//   EQUAL,
+// }
 
-List<List<TileState>> chunk(List<TileState> list, int size){
-  return List.generate(
-    (list.length / size).ceil(), 
-    (index) => list.sublist(index * size,
-      min(index * size + size, list.length),
-    ),
-  );
-}
+// List<List<TileState>> chunk(List<TileState> list, int size){
+//   return List.generate(
+//     (list.length / size).ceil(), 
+//     (index) => list.sublist(index * size,
+//       min(index * size + size, list.length),
+//     ),
+//   );
+// }
 
